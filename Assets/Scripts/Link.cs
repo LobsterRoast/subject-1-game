@@ -22,10 +22,4 @@ public class Link : MonoBehaviour
     {
         symlink = transform.parent.gameObject.GetComponent<SymLink>();
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

@@ -9,10 +9,4 @@ public class SymLink : MonoBehaviour
     {
         links = GetComponentsInChildren<Link>();
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

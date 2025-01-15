@@ -688,8 +688,8 @@ MonoBehaviour:
   position: {x: 0, y: 0, z: 0}
   rotation: {x: 0, y: 0, z: 0, w: 0}
   scale: {x: 0, y: 0, z: 0}
-  id: 1
-  scene_number: 0
+  id: 3
+  scene_number: 2
 --- !u!1 &832575517
 GameObject:
   m_ObjectHideFlags: 0
