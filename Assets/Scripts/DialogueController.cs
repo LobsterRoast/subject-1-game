@@ -1,0 +1,88 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEditor;
+using TMPro;
+
+public class DialogueController : MonoBehaviour
+{
+    private static GameObject dialogue_box;
+    private static TextMeshProUGUI tmp;
+    private static DialogueOption option_1;
+    private static DialogueOption option_2;
+
+    public bool options_open = false;
+    public DialogueNode initial_dialogue_node;
+    public DialogueNode active_dialogue_node;
+    public SaveData save_data;
+    public Dictionary<int, DialogueNode> dialogue_nodes = new Dictionary<int, DialogueNode>();
+
+    private IEnumerator UpdateText() {
+        tmp.text = "";
+        for (int i = 1; i <= active_dialogue_node.text.Length; i++) {
+            tmp.text = active_dialogue_node.text.Substring(0, i);
+            yield return new WaitForSeconds(0.05f);
+        }
+    }
+    
+    public void EndDialogue() {
+        dialogue_box.SetActive(false);
+        CloseOptions();
+    }
+
+    private void CreateOptions() {
+        options_open = true;
+        tmp.enabled = false;
+        option_1.Init(active_dialogue_node.dialogue_options[0]);
+        option_2.Init(active_dialogue_node.dialogue_options[1]);
+    }
+    private void CloseOptions() {
+        options_open = false;
+        tmp.enabled = true;
+        option_1.Close();
+        option_2.Close();
+    }
+
+    public void Advance(int index) {
+        active_dialogue_node = active_dialogue_node.next[index];
+        CloseOptions();
+        StartCoroutine(UpdateText());
+    }
+
+    // Returns true if dialogue continues, and false if dialogue ends
+    public bool Advance() {
+        if (options_open) return true;
+        if (active_dialogue_node.next.Count == 1) {
+            active_dialogue_node = active_dialogue_node.next[0];
+            StartCoroutine(UpdateText());
+            return true;
+        }
+        else if (active_dialogue_node.next.Count < 1) {
+            EndDialogue();
+            return false;
+        }
+        else {
+            CreateOptions();
+            return true;
+        }
+    }
+    public void StartDialogue() {
+        active_dialogue_node = initial_dialogue_node;
+        dialogue_box.SetActive(true);
+        StartCoroutine(UpdateText());
+    }
+    void Start() {
+        tmp = GameObject.FindWithTag("DialogueText").GetComponent<TextMeshProUGUI>();
+        option_1 = GameObject.FindWithTag("Option1").GetComponent<DialogueOption>();
+        option_2 = GameObject.FindWithTag("Option2").GetComponent<DialogueOption>();
+        dialogue_box = GameObject.FindWithTag("DialogueBox");
+        option_1.gameObject.SetActive(false);
+        option_2.gameObject.SetActive(false);
+        dialogue_box.SetActive(false);
+    }
+
+    // Update is called once per frame
+    void Update()
+    {       
+    }
+}

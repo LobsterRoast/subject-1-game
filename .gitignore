@@ -1,0 +1,19 @@
+/.plastic
+/.vscode
+/Assembly-CSharp-Editor.csproj
+/Assembly-CSharp.csproj
+/Build.x86_64
+/Build_Data
+/Builds
+/Library
+/Logs
+/SUBJECT 1 REDUX.sln
+/SUBJECT 1_BurstDebugInformation_DoNotShip
+/Temp
+/UnityPlayer.so
+/UserSettings
+/ignore.conf
+/libdecor-0.so.0
+/libdecor-cairo.so
+/mono_crash.mem.171.1.blob
+/mono_crash.mem.220.1.blob
