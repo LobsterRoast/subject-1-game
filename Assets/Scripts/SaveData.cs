@@ -6,6 +6,8 @@ using System.Text;
 using System.Text.Json.Nodes;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEditor.Rendering;
+using UnityEditor.Search.Providers;
 
 [CreateAssetMenu(fileName = "SaveData", menuName = "Scriptable Objects/SaveData")]
 
@@ -15,25 +17,41 @@ public class SaveData : ScriptableObject {
     // That's the point. You paid for the game; if you wanna skip 90% of it, that's your perogative.
     private JsonNode root;
     public string save_file_path;
+
+    private int ObjectCountInScene(string scene_number_string) {
+        return root[scene_number_string].AsObject().Count;
+    }
     
     // Saved object data is broken up by scenes. This function ensures that a scene
     // already has an element in the json file.
     private void EnsureSceneDataExists(int scene_number) {
-        Debug.Log(Application.persistentDataPath);
         JsonObject root_object = root.AsObject();
         string scene_number_string = scene_number.ToString();
         if (!root_object.ContainsKey(scene_number_string))
             root_object[scene_number_string] = new JsonObject();
     }
+
+    private void LoadObject(string scene_number, int id) {
+        string object_json_data = root[scene_number][id.ToString()].ToJsonString();
+        foreach (Saveable saveable_object in FindObjectsByType<Saveable>(FindObjectsSortMode.None)) {
+            if (id == saveable_object.id) {
+                JsonUtility.FromJsonOverwrite(object_json_data, saveable_object);
+                saveable_object.Load();
+                Debug.Log(object_json_data);
+            }
+        }
+    }
     public void LoadJsonData(string file_name) {
         save_file_path = Path.Combine(Application.persistentDataPath, file_name);
         root = JsonNode.Parse(File.ReadAllText(save_file_path));
     }
-    public List<Saveable> LoadSceneData() {
-        List<Saveable> scene_objects_data = new List<Saveable>();
-        int current_scene = SceneManager.GetActiveScene().buildIndex;
-
-        return scene_objects_data;
+    public void LoadSceneData() {
+        LoadJsonData("Test.json");
+        string current_scene_string = SceneManager.GetActiveScene().buildIndex.ToString();
+        int object_count = ObjectCountInScene(current_scene_string);
+        for (int id = 0; id < object_count; id++) {
+            LoadObject(current_scene_string, id);
+        }
     }
     public void AddSaveData(Saveable data) {
         LoadJsonData("Test.json");
@@ -46,9 +64,6 @@ public class SaveData : ScriptableObject {
         root[scene_number_string][id_string] = JsonNode.Parse(JsonUtility.ToJson(data, true));
     }
     public void CommitSaveData() {
-        FileStream json_file = File.OpenWrite(save_file_path);
-        byte[] bytes = Encoding.UTF8.GetBytes(root.ToJsonString());
-        json_file.Write(bytes);
-        json_file.Dispose();
+        File.WriteAllText(save_file_path, root.ToJsonString());
     }
 }

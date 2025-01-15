@@ -15,7 +15,8 @@ GameObject:
   - component: {fileID: 7321908977370088659}
   - component: {fileID: 3120093075583080133}
   - component: {fileID: 7162602296335366704}
-  - component: {fileID: 5540107140090380730}
+  - component: {fileID: 7927447795990352695}
+  - component: {fileID: 4107110952179670831}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -183,7 +184,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   held_weapon: {fileID: 11400000, guid: 8f44b793da9cb20e18861ccbe8b98aa3, type: 2}
---- !u!114 &5540107140090380730
+--- !u!114 &7927447795990352695
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -192,6 +193,26 @@ MonoBehaviour:
   m_GameObject: {fileID: 1329948229992081182}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a9dc89da6b1d2945b94cf52aab5ebd2c, type: 3}
+  m_Script: {fileID: 11500000, guid: 6632d9f42593bc1f9a0113d78914615c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  health: 100
+--- !u!114 &4107110952179670831
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1329948229992081182}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d72027ffe0ae31688ce46bdb17a92b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  save_data: {fileID: 11400000, guid: 57e8bc9b02a36abce9d3a90972f81ce4, type: 2}
+  position: {x: 0, y: 0, z: 0}
+  rotation: {x: 0, y: 0, z: 0, w: 0}
+  scale: {x: 0, y: 0, z: 0}
+  parent: {fileID: 0}
+  id: 0
+  scene_number: 0

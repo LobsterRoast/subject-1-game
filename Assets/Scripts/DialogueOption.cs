@@ -20,8 +20,3 @@ public class DialogueOption : MonoBehaviour
         EventSystem.current.SetSelectedGameObject(null);
     }
 }
-
-[Serializable]
-public class DialogueOptionData {
-    public string option_text;
-}
