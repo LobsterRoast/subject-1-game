@@ -2,14 +2,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ElevatorScript : MonoBehaviour
+public class ElevatorScript : Saveable
 {
     private Transform start_point;
     private Transform end_point;
     private Transform target;
     private Transform rail;
     public float velocity;
+    public Transform saved_target;
 
+
+    public override void ScriptableSave() {
+        saved_target = target;
+    }
+    public override void ScriptableLoad() {
+        target = saved_target;
+    }
     // Start is called before the first frame update
     void Start()
     {

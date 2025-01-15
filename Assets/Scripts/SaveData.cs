@@ -37,9 +37,17 @@ public class SaveData : ScriptableObject {
             if (id == saveable_object.id) {
                 JsonUtility.FromJsonOverwrite(object_json_data, saveable_object);
                 saveable_object.Load();
-                Debug.Log(object_json_data);
             }
         }
+    }
+
+    private void LoadObject<T>(T saveable) {
+        string scene_number_string = saveable.scene_number.ToString();
+        string id_string = saveable.id.ToString();
+        if (!root.ContainsKey(scene_number_string)) return;
+        if (!root[scene_number_string].ContainsKey(id_string)) return;
+        string object_json_data = root[scene_number_string][id_string].ToJsonString();
+        JsonUtility.FromJsonOverwrite(object_json_data, saveable);
     }
     public void LoadJsonData(string file_name) {
         save_file_path = Path.Combine(Application.persistentDataPath, file_name);
@@ -53,7 +61,7 @@ public class SaveData : ScriptableObject {
             LoadObject(current_scene_string, id);
         }
     }
-    public void AddSaveData(Saveable data) {
+    public void AddSaveData<T>(T data) {
         LoadJsonData("Test.json");
         EnsureSceneDataExists(data.scene_number);
         string id_string = data.id.ToString();
