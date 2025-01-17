@@ -41,7 +41,7 @@ public class SaveData : ScriptableObject {
         }
     }
 
-    private void LoadObject<T>(T saveable) {
+    public void LoadObject<T>(T saveable) {
         string scene_number_string = saveable.scene_number.ToString();
         string id_string = saveable.id.ToString();
         if (!root.ContainsKey(scene_number_string)) return;

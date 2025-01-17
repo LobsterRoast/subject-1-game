@@ -12,11 +12,11 @@ public class ElevatorScript : Saveable
     public Transform saved_target;
 
 
-    public override void ScriptableSave() {
-        saved_target = target;
+    public override void Save() {
+        save_data.AddSaveData<ElevatorScript>(this);
     }
-    public override void ScriptableLoad() {
-        target = saved_target;
+    public override void Load() {
+        save_data.LoadObject<ElevatorScript>(this);
     }
     // Start is called before the first frame update
     void Start()
