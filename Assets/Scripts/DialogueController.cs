@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System;
 using UnityEngine;
 using UnityEditor;
 using TMPro;
@@ -16,7 +17,7 @@ public class DialogueController : MonoBehaviour
     public DialogueNode active_dialogue_node;
     public SaveData save_data;
     public Dictionary<int, DialogueNode> dialogue_nodes = new Dictionary<int, DialogueNode>();
-
+    public int save_id;
     private IEnumerator UpdateText() {
         tmp.text = "";
         for (int i = 1; i <= active_dialogue_node.text.Length; i++) {
@@ -72,6 +73,11 @@ public class DialogueController : MonoBehaviour
         StartCoroutine(UpdateText());
     }
     void Start() {
+        Saveable<int> initial_node_getter = new Saveable<int>(0, save_id);
+        try {
+            initial_node_getter = save_data.LoadObj(initial_node_getter);
+        }
+        catch(NullReferenceException e) {}
         tmp = GameObject.FindWithTag("DialogueText").GetComponent<TextMeshProUGUI>();
         option_1 = GameObject.FindWithTag("Option1").GetComponent<DialogueOption>();
         option_2 = GameObject.FindWithTag("Option2").GetComponent<DialogueOption>();
@@ -80,8 +86,6 @@ public class DialogueController : MonoBehaviour
         option_2.gameObject.SetActive(false);
         dialogue_box.SetActive(false);
     }
-
-    // Update is called once per frame
     void Update()
     {       
     }

@@ -35,7 +35,6 @@ public class Player : Entity
             transform.localScale *= 0.9f;
             yield return new WaitForSeconds(0.025f);
         }
-        save_data.LoadSceneData();
         rb.useGravity = true;
     }
 }

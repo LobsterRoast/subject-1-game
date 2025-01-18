@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ElevatorScript : Saveable
+public class ElevatorScript : MonoBehaviour
 {
     private Transform start_point;
     private Transform end_point;
@@ -11,15 +11,6 @@ public class ElevatorScript : Saveable
     public float velocity;
     public bool saved_target;
 
-
-    public override void Save() {
-        saved_target = target == start_point ? true : false;
-        save_data.AddSaveData<ElevatorScript>(this);
-    }
-    public override void Load() {
-        save_data.LoadObject<ElevatorScript>(this);
-        target = saved_target ? start_point : end_point;
-    }
     // Start is called before the first frame update
     void Start()
     {
