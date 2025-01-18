@@ -37,7 +37,7 @@ public class SaveData : ScriptableObject {
     public void CommitSaveData() {
         File.WriteAllText(save_file_path, root.ToJsonString());
     }
-    public void SaveObj(Saveable<int> data) {
+    public void SaveObj<T>(Saveable<T> data) {
         LoadJsonData("Test.json");
         EnsureSceneDataExists(data.scene_number);
         string id_string = data.id.ToString();
@@ -48,13 +48,13 @@ public class SaveData : ScriptableObject {
         root[scene_number_string][id_string] = JsonNode.Parse(JsonUtility.ToJson(data, true));
         CommitSaveData();
     }
-    public Saveable<int> LoadObj(Saveable<int> saveable) {
+    public Saveable<T> LoadObj<T>(Saveable<T> saveable) {
         LoadJsonData("Test.json");
         string scene_number_string = saveable.scene_number.ToString();
         string id_string = saveable.id.ToString();
         if (!root.AsObject().ContainsKey(scene_number_string)) throw new NullReferenceException();
         if (!root[scene_number_string].AsObject().ContainsKey(id_string)) throw new NullReferenceException();
         string object_json_data = root[scene_number_string][id_string].ToJsonString();
-        return JsonUtility.FromJson<Saveable<int>>(object_json_data);
+        return JsonUtility.FromJson<Saveable<T>>(object_json_data);
     }
 }

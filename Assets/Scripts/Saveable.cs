@@ -1,6 +1,4 @@
-using UnityEngine;
 using UnityEngine.SceneManagement;
-using System.IO;
 
 [System.Serializable]
 public class Saveable<T> {
