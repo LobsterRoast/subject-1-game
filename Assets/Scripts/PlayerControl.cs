@@ -6,6 +6,7 @@ public class PlayerControl : Controllable {
     private FillMeter jetpack_fuel_meter_field = null;
     private DialogueController potential_dialogue_controller;
     private DialogueController active_dialogue_controller;
+    private Player player;
 
 
     public KeyCode create_instance;
@@ -15,7 +16,6 @@ public class PlayerControl : Controllable {
     public GameObject instance_prefab;
     public PlayerWeapon player_weapon;
     public bool in_dialogue;
-    
     protected override FillMeter jetpack_fuel_meter_prop {
         get {
             if(jetpack_fuel_meter_field)
@@ -57,7 +57,7 @@ public class PlayerControl : Controllable {
             Vector3 mouse_pos = Input.mousePosition;
             mouse_pos.x -= Screen.width/2;
             mouse_pos.y -= Screen.height/2;
-            player_weapon.Attack(mouse_pos.normalized);
+            player_weapon.Attack(mouse_pos.normalized, player);
     }
     
     protected override void PrefabSpecificInputs() {
@@ -80,5 +80,8 @@ public class PlayerControl : Controllable {
         }
         float axis = Input.GetAxis("Mouse ScrollWheel");
         global_info.ChangeGravity(axis*3f);
+    }
+    protected override void ControllableStart() {
+        player = GetComponent<Player>();
     }
 }

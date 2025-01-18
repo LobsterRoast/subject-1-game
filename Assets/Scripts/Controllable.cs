@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class Controllable : MonoBehaviour {
+public abstract class Controllable : MonoBehaviour {
     // Privates
     private Rigidbody rb;
     private float dx;
@@ -22,10 +22,10 @@ public class Controllable : MonoBehaviour {
     public KeyCode jetpack;
     
     // Protecteds
-    protected virtual FillMeter jetpack_fuel_meter_prop { get; }
+    protected abstract void ControllableStart();
+    protected abstract FillMeter jetpack_fuel_meter_prop { get; }
 
-    protected virtual void PrefabSpecificInputs() {
-    }
+    protected abstract void PrefabSpecificInputs();
     void OnCollisionEnter(Collision other) {
         taking_knockback = false;
     }
@@ -89,6 +89,7 @@ public class Controllable : MonoBehaviour {
     void Start()
     {
         SetVariables();
+        ControllableStart();
     }
 
     // Update is called once per frame

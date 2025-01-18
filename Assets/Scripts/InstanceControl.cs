@@ -13,4 +13,11 @@ public class InstanceControl : Controllable {
                     .GetComponent<FillMeter>());
         }
     }
+    protected override void ControllableStart() {
+        
+    }
+
+    protected override void PrefabSpecificInputs() {
+
+    }
 }

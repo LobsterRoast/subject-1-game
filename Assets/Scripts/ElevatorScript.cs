@@ -9,14 +9,16 @@ public class ElevatorScript : Saveable
     private Transform target;
     private Transform rail;
     public float velocity;
-    public Transform saved_target;
+    public bool saved_target;
 
 
     public override void Save() {
+        saved_target = target == start_point ? true : false;
         save_data.AddSaveData<ElevatorScript>(this);
     }
     public override void Load() {
         save_data.LoadObject<ElevatorScript>(this);
+        target = saved_target ? start_point : end_point;
     }
     // Start is called before the first frame update
     void Start()
@@ -28,7 +30,7 @@ public class ElevatorScript : Saveable
         target = end_point;
         rail.parent = null;
     }
-    void OnCollisionEnter(Collision other) {
+    void OnCollisionStay(Collision other) {
         other.gameObject.transform.parent = transform;
     }
     void OnCollisionExit(Collision other) {
