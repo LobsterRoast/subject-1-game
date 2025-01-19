@@ -11,6 +11,7 @@ public abstract class Controllable : MonoBehaviour {
     private bool double_jump_available;
 
     // Publics
+    public ControllableEntity entity;
     public GlobalInfo global_info;
     public float velocity;
     public Vector3 jump_vector;
@@ -81,7 +82,9 @@ public abstract class Controllable : MonoBehaviour {
             }
             ApplyMovementVector();
 
-            if (Input.GetKey(jetpack) && jetpack_acquired && jetpack_fuel > 0.0f) {
+            if (Input.GetKey(jetpack) &&
+                jetpack_fuel > 0.0f &&
+                (entity.active_accessory & Accessory.Jetpack) != Accessory.None) {
                 UseJetpack();
             }
         }

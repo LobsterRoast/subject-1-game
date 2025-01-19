@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Enemy : Entity
+public class Enemy : ControllableEntity
 {
     public override EntityType entity_type { get { return EntityType.Enemy; } }
     protected override void OnDeath() {

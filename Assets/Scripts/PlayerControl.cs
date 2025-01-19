@@ -11,7 +11,6 @@ public class PlayerControl : Controllable {
 
     public KeyCode create_instance;
     public KeyCode advance_dialogue;
-    public KeyCode gravity_flip;
     public int attack;
     public GameObject instance_prefab;
     public PlayerWeapon player_weapon;
@@ -61,14 +60,11 @@ public class PlayerControl : Controllable {
     }
     
     protected override void PrefabSpecificInputs() {
-        if (Input.GetKeyDown(create_instance))
+        if (Input.GetKeyDown(create_instance) &&
+            (entity.active_accessory & Accessory.Instantiator) != Accessory.None)
             ToggleInstance();
         if (Input.GetMouseButtonDown(attack)) {
             ShootProjectile();
-        }
-        if (Input.GetKeyDown(gravity_flip)) {
-            Physics.gravity *= -1;
-            global_info.gravity_fac *= -1;
         }
         if (Input.GetKeyDown(advance_dialogue) && active_dialogue_controller) {
             if (in_dialogue)
@@ -78,7 +74,8 @@ public class PlayerControl : Controllable {
                 in_dialogue = true;
             }
         }
-        float axis = Input.GetAxis("Mouse ScrollWheel");
+        int gravity_manipulator_active = (int)(entity.active_accessory & Accessory.Gravity_Manipulator);
+        float axis = Input.GetAxis("Mouse ScrollWheel") * gravity_manipulator_active;
         global_info.ChangeGravity(axis*3f);
     }
     protected override void ControllableStart() {

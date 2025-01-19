@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Player : Entity
+public class Player : ControllableEntity
 {
     public Image health_bar;
     public SaveData save_data;
