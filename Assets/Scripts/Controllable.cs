@@ -31,6 +31,11 @@ public abstract class Controllable : MonoBehaviour {
     }
     void OnCollisionExit(Collision other) {
     }
+    private void SetVerticalVelocityZero() {
+        Vector3 vel = rb.linearVelocity;
+        vel.y = 0f;
+        rb.linearVelocity = vel;
+    }
     private void UseJetpack() {
         rb.AddForce(jetpack_vector * Time.deltaTime * global_info.gravity_fac, ForceMode.Force);
         jetpack_fuel = Mathf.Clamp(jetpack_fuel - 0.1f, 0.0f, 100.0f);
@@ -47,6 +52,7 @@ public abstract class Controllable : MonoBehaviour {
     }
 
     private void Jump() {
+        SetVerticalVelocityZero();
         rb.AddForce(global_info.gravity_fac * jump_vector, ForceMode.Force);
     }
     private void DoubleJump() {
