@@ -10,7 +10,6 @@ using UnityEditor.Rendering;
 using UnityEditor.Search.Providers;
 
 [CreateAssetMenu(fileName = "SaveData", menuName = "Scriptable Objects/SaveData")]
-
 public class SaveData : ScriptableObject {
     // Save data is handled via json
     // Yes, it's easily manipulatable so people could theoretically put themselves at the end of the game.
@@ -52,8 +51,10 @@ public class SaveData : ScriptableObject {
         LoadJsonData("Test.json");
         string scene_number_string = saveable.scene_number.ToString();
         string id_string = saveable.id.ToString();
-        if (!root.AsObject().ContainsKey(scene_number_string)) throw new NullReferenceException();
-        if (!root[scene_number_string].AsObject().ContainsKey(id_string)) throw new NullReferenceException();
+        if (!root.AsObject().ContainsKey(scene_number_string))
+            throw new SaveDataNotFoundException("Could not find save data for scene " + scene_number_string);
+        if (!root[scene_number_string].AsObject().ContainsKey(id_string))
+            throw new SaveDataNotFoundException("Could not find save data for object " + id_string + " in scene " + scene_number_string);
         string object_json_data = root[scene_number_string][id_string].ToJsonString();
         return JsonUtility.FromJson<Saveable<T>>(object_json_data);
     }

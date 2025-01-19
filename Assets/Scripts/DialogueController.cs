@@ -85,7 +85,9 @@ public class DialogueController : MonoBehaviour
         try {
             initial_node_getter = save_data.LoadObj(initial_node_getter);
         }
-        catch(NullReferenceException _e) {}
+        catch(SaveDataNotFoundException e) {
+            Debug.LogException(e);
+        }
         tmp = GameObject.FindWithTag("DialogueText").GetComponent<TextMeshProUGUI>();
         option_1 = GameObject.FindWithTag("Option1").GetComponent<DialogueOption>();
         option_2 = GameObject.FindWithTag("Option2").GetComponent<DialogueOption>();
