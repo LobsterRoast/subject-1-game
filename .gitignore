@@ -17,5 +17,6 @@
 /libdecor-cairo.so
 /mono_crash.mem.171.1.blob
 /mono_crash.mem.220.1.blob
-subject-1-game.sln
-mono_crash.mem.168.1.blob
+/subject-1-game.sln
+/mono_crash.mem.168.1.blob
+/*.blob
