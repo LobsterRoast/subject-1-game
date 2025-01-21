@@ -267,3 +267,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   max_hp: 1
   active_accessory: 1
+  controller: {fileID: -1104953371552178477}

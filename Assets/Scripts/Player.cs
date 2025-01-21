@@ -39,7 +39,6 @@ public class Player : ControllableEntity
         }
         rb.useGravity = true;
     }
-
     public void Start() {
         main = this;
     }

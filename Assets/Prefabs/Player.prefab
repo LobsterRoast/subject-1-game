@@ -197,6 +197,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   max_hp: 0
   active_accessory: 1
+  controller: {fileID: 3120093075583080133}
   health_bar: {fileID: 0}
   save_data: {fileID: 0}
   rb: {fileID: 0}
