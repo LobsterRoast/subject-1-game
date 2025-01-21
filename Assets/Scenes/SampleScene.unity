@@ -537,29 +537,32 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   options_open: 0
-  initial_dialogue_node:
-    text: BALLS
+  dialogue_trees:
+  - text: Hello. how are you?
     next:
-    - text: ARE
-      next:
-      - text: HOT
-        next: []
-        dialogue_options: []
+    - text: That's good.
+      next: []
       dialogue_options: []
-    - text: AREN'T
-      next:
-      - text: GAY
-        next: []
-        dialogue_options: []
+      change_default_dialogue_tree: 1
+    - text: Not skibidi!
+      next: []
       dialogue_options: []
+      change_default_dialogue_tree: 1
     dialogue_options:
-    - option_text: ARE!
-    - option_text: AREN'T!
+    - option_text: RIZZ
+    - option_text: NO RIZZ
+    change_default_dialogue_tree: 0
+  - text: I already talked to you. Go away!
+    next: []
+    dialogue_options: []
+    change_default_dialogue_tree: 1
   active_dialogue_node:
     text: 
     next: []
     dialogue_options: []
+    change_default_dialogue_tree: 0
   save_data: {fileID: 11400000, guid: 57e8bc9b02a36abce9d3a90972f81ce4, type: 2}
+  save_id: 0
 --- !u!23 &693620044
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -1021,12 +1024,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d72027ffe0ae31688ce46bdb17a92b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  save_data: {fileID: 11400000, guid: 57e8bc9b02a36abce9d3a90972f81ce4, type: 2}
-  position: {x: 0, y: 0, z: 0}
-  rotation: {x: 0, y: 0, z: 0, w: 0}
-  scale: {x: 0, y: 0, z: 0}
-  id: 0
-  scene_number: 0
 --- !u!1001 &1444687273
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -39,10 +40,10 @@ public class Player : ControllableEntity
         }
         rb.useGravity = true;
     }
-    public bool ToggleAccessory(Accessory accessory) {
-        
-    }
     public void Start() {
         main = this;
+        active_accessory |= Accessory.Gravity_Manipulator;
+        active_accessory |= Accessory.Jetpack;
+        active_accessory |= Accessory.Instantiator;
     }
 }

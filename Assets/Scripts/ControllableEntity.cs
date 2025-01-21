@@ -4,9 +4,11 @@ public abstract class ControllableEntity : Entity {
     public Accessory active_accessory = Accessory.None;
     public Controllable controller;
     public bool ToggleAccessory(Accessory accessory) {
-        if (active_accessory_count >= 2) return false;
+        if (active_accessory_count >= 2)
+            return false;
         active_accessory ^= accessory;
-        if ((active_accessory & accessory) > 0) active_accessory_count++;
+        if ((active_accessory & accessory) > 0) 
+            active_accessory_count++;
         else active_accessory_count--;
         return true;
     }

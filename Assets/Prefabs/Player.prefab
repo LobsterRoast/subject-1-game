@@ -155,15 +155,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   is_grounded: 0
   entity: {fileID: 7927447795990352695}
+  bindings: {fileID: 11400000, guid: 01b6c22c6597e5271976a925c50af19d, type: 2}
   global_info: {fileID: 11400000, guid: 7cc400f391adcd716a5c8965463a2653, type: 2}
   velocity: 10
   jump_vector: {x: 0, y: 600, z: 0}
   jetpack_vector: {x: 0, y: 2000, z: 0}
   taking_knockback: 0
-  walk_left: 97
-  walk_right: 100
-  jump: 32
-  jetpack: 304
   create_instance: 114
   advance_dialogue: 13
   attack: 0

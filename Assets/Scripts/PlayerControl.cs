@@ -81,5 +81,9 @@ public class PlayerControl : Controllable {
     }
     protected override void ControllableStart() {
         player = GetComponent<Player>();
+        walk_left = bindings.player_walk_left;
+        walk_right = bindings.player_walk_right;
+        jump = bindings.player_jump;
+        jetpack = bindings.player_jetpack;
     }
 }

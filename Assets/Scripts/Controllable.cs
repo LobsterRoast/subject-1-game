@@ -10,19 +10,20 @@ public abstract class Controllable : MonoBehaviour {
     private bool jetpack_acquired = true;
     private bool double_jump_available;
 
+    protected KeyCode walk_left { get; set; }
+    protected KeyCode walk_right { get; set; }
+    protected KeyCode jump { get; set; }
+    protected KeyCode jetpack { get; set; }
     // Publics
     public ControllableEntity entity;
+    public Keybinds bindings;
     public GlobalInfo global_info;
     public float velocity;
     public Vector3 jump_vector;
     public Vector3 jetpack_vector;
     public bool taking_knockback;
-    public KeyCode walk_left;
-    public KeyCode walk_right;
-    public KeyCode jump;
-    public KeyCode jetpack;
     
-    // Protecteds
+    // This is a separate start function that doesn't hide the main one
     protected abstract void ControllableStart();
     protected abstract FillMeter jetpack_fuel_meter_prop { get; }
 
@@ -38,9 +39,11 @@ public abstract class Controllable : MonoBehaviour {
         rb.linearVelocity = vel;
     }
     private void UseJetpack() {
-        rb.AddForce(jetpack_vector * Time.deltaTime * global_info.gravity_fac, ForceMode.Force);
-        jetpack_fuel = Mathf.Clamp(jetpack_fuel - 0.1f, 0.0f, 100.0f);
-        jetpack_fuel_meter_prop.SetFillAmount(jetpack_fuel/100.0f);
+        if (entity.CheckAccessory(Accessory.Jetpack)) {
+            rb.AddForce(jetpack_vector * Time.deltaTime * global_info.gravity_fac, ForceMode.Force);
+            jetpack_fuel = Mathf.Clamp(jetpack_fuel - 0.1f, 0.0f, 100.0f);
+            jetpack_fuel_meter_prop.SetFillAmount(jetpack_fuel/100.0f);
+        }
     }
 
     private void GroundCheck() {
