@@ -39,6 +39,9 @@ public class Player : ControllableEntity
         }
         rb.useGravity = true;
     }
+    public bool ToggleAccessory(Accessory accessory) {
+        
+    }
     public void Start() {
         main = this;
     }

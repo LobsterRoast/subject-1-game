@@ -61,7 +61,7 @@ public class PlayerControl : Controllable {
     
     protected override void PrefabSpecificInputs() {
         if (Input.GetKeyDown(create_instance) &&
-            (entity.active_accessory & Accessory.Instantiator) != Accessory.None)
+            entity.CheckAccessory(Accessory.Instantiator))
             ToggleInstance();
         if (Input.GetMouseButtonDown(attack)) {
             ShootProjectile();
@@ -74,9 +74,10 @@ public class PlayerControl : Controllable {
                 in_dialogue = true;
             }
         }
-        int gravity_manipulator_active = (int)(entity.active_accessory & Accessory.Gravity_Manipulator);
-        float axis = Input.GetAxis("Mouse ScrollWheel") * gravity_manipulator_active;
-        global_info.ChangeGravity(axis*3f);
+        if (entity.CheckAccessory(Accessory.Gravity_Manipulator)) {
+            float axis = Input.GetAxis("Mouse ScrollWheel");
+            global_info.ChangeGravity(axis*3f);
+        }
     }
     protected override void ControllableStart() {
         player = GetComponent<Player>();
