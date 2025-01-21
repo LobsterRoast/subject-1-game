@@ -60,13 +60,13 @@ public class PlayerControl : Controllable {
     }
     
     protected override void PrefabSpecificInputs() {
-        if (Input.GetKeyDown(create_instance) &&
+        if (Keybinds.GetInputDown(bindings.toggle_instance) &&
             entity.CheckAccessory(Accessory.Instantiator))
             ToggleInstance();
-        if (Input.GetMouseButtonDown(attack)) {
+        if (Keybinds.GetInputDown(bindings.attack)) {
             ShootProjectile();
         }
-        if (Input.GetKeyDown(advance_dialogue) && active_dialogue_controller) {
+        if (Keybinds.GetInputDown(bindings.advance_or_start_dialogue) && active_dialogue_controller) {
             if (in_dialogue)
                 in_dialogue = active_dialogue_controller.Advance();
             else {
@@ -75,7 +75,11 @@ public class PlayerControl : Controllable {
             }
         }
         if (entity.CheckAccessory(Accessory.Gravity_Manipulator)) {
-            float axis = Input.GetAxis("Mouse ScrollWheel");
+            float axis = 0;
+            if (Keybinds.GetInput(bindings.increase_gravity))
+                axis++;
+            if (Keybinds.GetInput(bindings.decrease_gravity))
+                axis--;
             global_info.ChangeGravity(axis*3f);
         }
     }

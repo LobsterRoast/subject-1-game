@@ -69,13 +69,13 @@ public abstract class Controllable : MonoBehaviour {
     private void CheckInputs() {
         if (!taking_knockback) {
             dx = 0.0f;
-            if (Input.GetKey(walk_left)) {
+            if (Keybinds.GetInput(walk_left)) {
                 dx = -velocity;
             }
-            if (Input.GetKey(walk_right)) {
+            if (Keybinds.GetInput(walk_right)) {
                 dx = velocity;
             }
-            if (Input.GetKeyDown(jump)) {
+            if (Keybinds.GetInputDown(jump)) {
                 if (is_grounded) {
                     Jump();
                 }
@@ -85,7 +85,7 @@ public abstract class Controllable : MonoBehaviour {
             }
             ApplyMovementVector();
 
-            if (Input.GetKey(jetpack) &&
+            if (Keybinds.GetInput(jetpack) &&
                 jetpack_fuel > 0.0f &&
                 (entity.active_accessory & Accessory.Jetpack) != Accessory.None) {
                 UseJetpack();
