@@ -31,7 +31,13 @@ public class SaveData : ScriptableObject {
     }
     public void LoadJsonData(string file_name) {
         save_file_path = Path.Combine(Application.persistentDataPath, file_name);
-        root = JsonNode.Parse(File.ReadAllText(save_file_path));
+        try {
+            root = JsonNode.Parse(File.ReadAllText(save_file_path));
+        }
+        catch (FileNotFoundException e) {
+            File.WriteAllText(save_file_path, "{}");
+            root = JsonNode.Parse("{}");
+        }
     }
     public void CommitSaveData() {
         File.WriteAllText(save_file_path, root.ToJsonString());
