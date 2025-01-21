@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class Player : ControllableEntity
 {
+    // Static reference to the player, since there should only be one at a time
+    public static Player main;
     public Image health_bar;
     public SaveData save_data;
     public Rigidbody rb;
@@ -36,5 +38,9 @@ public class Player : ControllableEntity
             yield return new WaitForSeconds(0.025f);
         }
         rb.useGravity = true;
+    }
+
+    public void Start() {
+        main = this;
     }
 }
