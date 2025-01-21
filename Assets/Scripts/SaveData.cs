@@ -35,6 +35,7 @@ public class SaveData : ScriptableObject {
             root = JsonNode.Parse(File.ReadAllText(save_file_path));
         }
         catch (FileNotFoundException e) {
+            // If the save file doesn't already exist, create one.
             File.WriteAllText(save_file_path, "{}");
             root = JsonNode.Parse("{}");
         }

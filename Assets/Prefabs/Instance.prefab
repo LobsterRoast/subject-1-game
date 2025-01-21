@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: -1104953371552178477}
   - component: {fileID: 6982372053024891432}
   - component: {fileID: 1804215687519737287}
+  - component: {fileID: 8844523489594753469}
   m_Layer: 7
   m_Name: Instance
   m_TagString: Untagged
@@ -154,6 +155,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   is_grounded: 0
+  entity: {fileID: 8844523489594753469}
   global_info: {fileID: 11400000, guid: 7cc400f391adcd716a5c8965463a2653, type: 2}
   velocity: 10
   jump_vector: {x: 0, y: 600, z: 0}
@@ -251,3 +253,17 @@ MonoBehaviour:
   m_LightCookieSize: {x: 1, y: 1}
   m_LightCookieOffset: {x: 0, y: 0}
   m_SoftShadowQuality: 0
+--- !u!114 &8844523489594753469
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1329948229992081182}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bfa7cd643e09dcafb8724b031c5ac5e0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  max_hp: 1
+  active_accessory: 1
