@@ -233,10 +233,6 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2334935983760983661}
     - target: {fileID: 2314313100290402695, guid: f199bb4b6ec06f22984a9a7fe221d1fd, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
-      value: 
-      objectReference: {fileID: 6032666198682762064}
-    - target: {fileID: 2314313100290402695, guid: f199bb4b6ec06f22984a9a7fe221d1fd, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
       objectReference: {fileID: 0}
@@ -249,16 +245,8 @@ PrefabInstance:
       value: AdvanceDialogue
       objectReference: {fileID: 0}
     - target: {fileID: 2314313100290402695, guid: f199bb4b6ec06f22984a9a7fe221d1fd, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
-      value: ResetButtons
-      objectReference: {fileID: 0}
-    - target: {fileID: 2314313100290402695, guid: f199bb4b6ec06f22984a9a7fe221d1fd, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
       value: PlayerControl, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 2314313100290402695, guid: f199bb4b6ec06f22984a9a7fe221d1fd, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
-      value: DialogueOption, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 2314313100290402695, guid: f199bb4b6ec06f22984a9a7fe221d1fd, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
@@ -285,17 +273,9 @@ PrefabInstance:
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 2812763630365709540, guid: f199bb4b6ec06f22984a9a7fe221d1fd, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2812763630365709540, guid: f199bb4b6ec06f22984a9a7fe221d1fd, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 2334935983760983661}
-    - target: {fileID: 2812763630365709540, guid: f199bb4b6ec06f22984a9a7fe221d1fd, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
-      value: 
-      objectReference: {fileID: 2740124569111750330}
     - target: {fileID: 2812763630365709540, guid: f199bb4b6ec06f22984a9a7fe221d1fd, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
@@ -309,16 +289,8 @@ PrefabInstance:
       value: AdvanceDialogue
       objectReference: {fileID: 0}
     - target: {fileID: 2812763630365709540, guid: f199bb4b6ec06f22984a9a7fe221d1fd, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
-      value: ResetButtons
-      objectReference: {fileID: 0}
-    - target: {fileID: 2812763630365709540, guid: f199bb4b6ec06f22984a9a7fe221d1fd, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
       value: PlayerControl, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 2812763630365709540, guid: f199bb4b6ec06f22984a9a7fe221d1fd, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
-      value: DialogueOption, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 2812763630365709540, guid: f199bb4b6ec06f22984a9a7fe221d1fd, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
@@ -345,17 +317,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f199bb4b6ec06f22984a9a7fe221d1fd, type: 3}
---- !u!114 &2740124569111750330 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6512282038221519720, guid: f199bb4b6ec06f22984a9a7fe221d1fd, type: 3}
-  m_PrefabInstance: {fileID: 8964035475570449874}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 684a2e95c3b1136338958be461177130, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &4550457195820233191 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4846117773029174325, guid: f199bb4b6ec06f22984a9a7fe221d1fd, type: 3}
@@ -365,17 +326,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &6032666198682762064 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3449461771417265794, guid: f199bb4b6ec06f22984a9a7fe221d1fd, type: 3}
-  m_PrefabInstance: {fileID: 8964035475570449874}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 684a2e95c3b1136338958be461177130, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!224 &8006551167673795999 stripped

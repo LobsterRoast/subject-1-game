@@ -4,7 +4,6 @@ using UnityEngine.InputSystem;
 public class PlayerControl : Controllable {
     private GameObject instance;
     private FillMeter jetpack_fuel_meter_field = null;
-    private DialogueController potential_dialogue_controller;
     private DialogueController active_dialogue_controller;
     private Player player;
 

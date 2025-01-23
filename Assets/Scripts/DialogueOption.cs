@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using TMPro;
 
-public class DialogueOption : MonoBehaviour
+public class DialogueOption : S1Button
 {
     public TextMeshProUGUI tmp;
 
@@ -14,9 +14,5 @@ public class DialogueOption : MonoBehaviour
 
     public void Close() {
         gameObject.SetActive(false);
-    }
-
-    public static void ResetButtons() {
-        EventSystem.current.SetSelectedGameObject(null);
     }
 }

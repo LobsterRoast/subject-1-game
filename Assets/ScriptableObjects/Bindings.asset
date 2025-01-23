@@ -15,8 +15,13 @@ MonoBehaviour:
   player_walk_left: 97
   player_walk_right: 100
   player_jump: 32
-  player_jetpack: 304
   instance_walk_left: 276
   instance_walk_right: 275
   instance_jump: 273
+  player_jetpack: 304
   instance_jetpack: 303
+  toggle_instance: 114
+  increase_gravity: 321
+  decrease_gravity: 322
+  attack: 323
+  advance_or_start_dialogue: 13
