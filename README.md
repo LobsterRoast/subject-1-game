@@ -1,0 +1,1 @@
+This is the source code for the tech demo of the game SUBJECT ONE. I've elected to make this source-available so that it can go on my portfolio, although it is prohibited from being redistributed under any circumstances. The actual production branch of the game will be private and NOT source-available.
