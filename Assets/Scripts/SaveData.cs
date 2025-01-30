@@ -6,8 +6,6 @@ using System.Text;
 using System.Text.Json.Nodes;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEditor.Rendering;
-using UnityEditor.Search.Providers;
 
 [CreateAssetMenu(fileName = "SaveData", menuName = "Scriptable Objects/SaveData")]
 public class SaveData : ScriptableObject {

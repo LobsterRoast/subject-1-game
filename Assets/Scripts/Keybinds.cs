@@ -21,6 +21,7 @@ public class Keybinds : ScriptableObject
     public KeyCode attack;
     [Header("Interaction Bindings")]
     public KeyCode advance_or_start_dialogue;
+    public KeyCode open_menu;
     public static bool GetInputDown(KeyCode key_code) {
         switch(key_code) {
             case KeyCode.WheelUp:

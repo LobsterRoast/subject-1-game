@@ -25,3 +25,4 @@ MonoBehaviour:
   decrease_gravity: 322
   attack: 323
   advance_or_start_dialogue: 13
+  open_menu: 27

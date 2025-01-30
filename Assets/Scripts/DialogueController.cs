@@ -2,15 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using System;
 using UnityEngine;
-using UnityEditor;
 using TMPro;
 
 public class DialogueController : MonoBehaviour
 {
     private static GameObject dialogue_box;
     private static TextMeshProUGUI tmp;
-    private static DialogueOption option_1;
-    private static DialogueOption option_2;
+    private static DialogueOption option_1, option_2;
     private Saveable<int> initial_node_getter;
     private bool dialogue_active;
 

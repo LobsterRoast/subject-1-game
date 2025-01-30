@@ -81,6 +81,9 @@ public class PlayerControl : Controllable {
                 axis--;
             global_info.ChangeGravity(axis*3f);
         }
+        if (Keybinds.GetInputDown(bindings.open_menu)) {
+            InGameMenu.menu.Toggle();
+        }
     }
     protected override void ControllableStart() {
         player = GetComponent<Player>();
