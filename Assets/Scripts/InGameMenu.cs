@@ -30,24 +30,20 @@ public class InGameMenu : MonoBehaviour
         MenuState page_enum = (MenuState)page;
         switch (page_enum) {
             case MenuState.Inventory:
-                if (!cached_inventory_menu)
-                    cached_inventory_menu = inventory_menu;
-                scroll_menu = Instantiate(cached_inventory_menu, scroll_menu_parent);
-                Debug.Log("Switched to Inventory");
+                InstantiatePage(inventory_menu, cached_inventory_menu);
                 break;
             case MenuState.Abilities:
-                if (!cached_abilities_menu)
-                    cached_abilities_menu = abilities_menu;
-                scroll_menu = Instantiate(cached_abilities_menu, scroll_menu_parent);
-                Debug.Log("Switched to Abilities");
+                InstantiatePage(abilities_menu, cached_abilities_menu);
                 break;
             case MenuState.Options:
-                if (!cached_options_menu)
-                    cached_options_menu = options_menu;
-                scroll_menu = Instantiate(cached_options_menu, scroll_menu_parent);
-                Debug.Log("Switched to Options");
+                InstantiatePage(options_menu, cached_options_menu);
                 break;
         }
+    }
+    private void InstantiatePage(GameObject page, GameObject cached_page) {
+        if (!cached_page)
+            cached_page = page;
+        scroll_menu = Instantiate(cached_page, scroll_menu_parent);
     }
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
