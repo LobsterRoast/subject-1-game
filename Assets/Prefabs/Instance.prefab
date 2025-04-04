@@ -162,6 +162,7 @@ MonoBehaviour:
   jump_vector: {x: 0, y: 600, z: 0}
   jetpack_vector: {x: 0, y: 2000, z: 0}
   taking_knockback: 0
+  physics_material: {fileID: 13400000, guid: b3957d0041a4c36d9a1775c409c3dfac, type: 2}
 --- !u!108 &6982372053024891432
 Light:
   m_ObjectHideFlags: 0

@@ -9,14 +9,14 @@ public class DialogueController : MonoBehaviour
     private static GameObject dialogue_box;
     private static TextMeshProUGUI tmp;
     private static DialogueOption option_1, option_2;
-    private Saveable<int> initial_node_getter;
+    private Saveable<string> initial_node_getter;
     private bool dialogue_active;
 
     public bool options_open = false;
-    public List<DialogueNode> dialogue_trees = new List<DialogueNode>();
     public DialogueNode active_dialogue_node;
     public SaveData save_data;
-    public Dictionary<int, DialogueNode> dialogue_nodes = new Dictionary<int, DialogueNode>();
+    public List<DialogueNode> dialogue_nodes = new List<DialogueNode>();
+    private Dictionary<string, DialogueNode> dialogue_nodes_hashmap = new Dictionary<string, DialogueNode>();
     public int save_id;
     private IEnumerator UpdateText() {
         tmp.text = "";
@@ -45,9 +45,15 @@ public class DialogueController : MonoBehaviour
         option_1.Close();
         option_2.Close();
     }
+    private void UpdateSavedDialogueState() {
+        if (active_dialogue_node.set_default_dialogue_key == "")
+            return;
+        initial_node_getter.data = active_dialogue_node.set_default_dialogue_key;
+    }
     private void ChangeNode(int index = 0) {
-        active_dialogue_node = active_dialogue_node.next[index];
-        initial_node_getter.data = active_dialogue_node.change_default_dialogue_tree;
+        active_dialogue_node = dialogue_nodes_hashmap[active_dialogue_node.next[index]];
+        active_dialogue_node.execution?.Invoke();
+        UpdateSavedDialogueState();
         StartCoroutine(UpdateText());
     }
     public void Advance(int index) {
@@ -73,13 +79,16 @@ public class DialogueController : MonoBehaviour
     }
     public void StartDialogue() {
         dialogue_active = true;
-        active_dialogue_node = dialogue_trees[initial_node_getter.data];
-        initial_node_getter.data = active_dialogue_node.change_default_dialogue_tree;
+        active_dialogue_node = dialogue_nodes_hashmap[initial_node_getter.data];
+        UpdateSavedDialogueState();
         dialogue_box.SetActive(true);
         StartCoroutine(UpdateText());
     }
     void Start() {
-        initial_node_getter = new Saveable<int>(0, save_id);
+        foreach (DialogueNode node in dialogue_nodes) {
+            dialogue_nodes_hashmap.Add(node.key, node);
+        }
+        initial_node_getter = new Saveable<string>("ENTRY", save_id);
         try {
             initial_node_getter = save_data.LoadObj(initial_node_getter);
         }
@@ -93,8 +102,5 @@ public class DialogueController : MonoBehaviour
         option_1.gameObject.SetActive(false);
         option_2.gameObject.SetActive(false);
         dialogue_box.SetActive(false);
-    }
-    void Update()
-    {       
     }
 }

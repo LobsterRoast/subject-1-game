@@ -22,10 +22,11 @@ public class ElevatorScript : MonoBehaviour
         rail.parent = null;
     }
     void OnCollisionStay(Collision other) {
-        other.gameObject.transform.parent = transform;
+        Transform other_tf = other.gameObject.transform;
+        other_tf.SetParent(transform);
     }
     void OnCollisionExit(Collision other) {
-        other.gameObject.transform.parent = null;
+        other.gameObject.transform.SetParent(null);
     }
     void FixedUpdate() {
         Vector3 pos = transform.position;

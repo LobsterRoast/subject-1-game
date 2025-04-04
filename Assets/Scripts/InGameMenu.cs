@@ -26,6 +26,7 @@ public class InGameMenu : MonoBehaviour
         gameObject.SetActive(false);
     }
     public void SwitchToPage(int page) {
+        UpdateCache();
         Destroy(scroll_menu);
         MenuState page_enum = (MenuState)page;
         switch (page_enum) {
@@ -37,6 +38,20 @@ public class InGameMenu : MonoBehaviour
                 break;
             case MenuState.Options:
                 InstantiatePage(options_menu, cached_options_menu);
+                break;
+        }
+        current_state = page_enum;
+    }
+    private void UpdateCache() {
+        switch (current_state) {
+            case MenuState.Inventory:
+                cached_inventory_menu = scroll_menu;
+                break;
+            case MenuState.Abilities:
+                cached_abilities_menu = scroll_menu;
+                break;
+            case MenuState.Options:
+                cached_options_menu = scroll_menu;
                 break;
         }
     }

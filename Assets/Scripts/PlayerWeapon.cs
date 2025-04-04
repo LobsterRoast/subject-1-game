@@ -12,15 +12,4 @@ public class PlayerWeapon : MonoBehaviour
     public void Attack(Vector3 direction, Entity sender) {
         CreateProjectile(direction, sender);
     }
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

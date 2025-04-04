@@ -9,6 +9,7 @@ public abstract class Controllable : MonoBehaviour {
     private float jetpack_fuel = 100f;
     private bool jetpack_acquired = true;
     private bool double_jump_available;
+    private Collider collider;
 
     protected KeyCode walk_left { get; set; }
     protected KeyCode walk_right { get; set; }
@@ -22,14 +23,19 @@ public abstract class Controllable : MonoBehaviour {
     public Vector3 jump_vector;
     public Vector3 jetpack_vector;
     public bool taking_knockback;
+    public PhysicsMaterial physics_material;
     
     // This is a separate start function that doesn't hide the main one
     protected abstract void ControllableStart();
     protected abstract FillMeter jetpack_fuel_meter_prop { get; }
 
     protected abstract void PrefabSpecificInputs();
-    void OnCollisionEnter(Collision other) {
-        taking_knockback = false;
+    public void DoKnockback(Vector3 force, Vector3 torque) {
+        taking_knockback = true;
+        rb.constraints ^= RigidbodyConstraints.FreezeRotationZ;
+        rb.AddForce(force, ForceMode.Impulse);
+        rb.AddTorque(torque, ForceMode.Impulse);
+        collider.material = null; 
     }
     void OnCollisionExit(Collision other) {
     }
@@ -53,10 +59,17 @@ public abstract class Controllable : MonoBehaviour {
     }
     private void SetVariables() {
         rb = GetComponent<Rigidbody>();
+        collider = GetComponent<Collider>();
     }
 
     private void Jump() {
         SetVerticalVelocityZero();
+        transform.rotation = new Quaternion(90f, 0f, 0f, 0f);
+        if (taking_knockback) {
+            taking_knockback = false;
+            collider.material = physics_material;
+            rb.constraints |= RigidbodyConstraints.FreezeRotationZ;
+        }
         rb.AddForce(global_info.gravity_fac * jump_vector, ForceMode.Force);
     }
     private void DoubleJump() {
@@ -75,20 +88,20 @@ public abstract class Controllable : MonoBehaviour {
             if (Keybinds.GetInput(walk_right)) {
                 dx = velocity;
             }
-            if (Keybinds.GetInputDown(jump)) {
-                if (is_grounded) {
-                    Jump();
-                }
-                else if (double_jump_available) {
-                    DoubleJump();
-                }
-            }
             ApplyMovementVector();
 
             if (Keybinds.GetInput(jetpack) &&
                 jetpack_fuel > 0.0f &&
                 (entity.active_accessory & Accessory.Jetpack) != Accessory.None) {
                 UseJetpack();
+            }
+        }
+        if (Keybinds.GetInputDown(jump)) {
+            if (is_grounded) {
+                Jump();
+            }
+            else if (double_jump_available && !taking_knockback) {
+                DoubleJump();
             }
         }
         PrefabSpecificInputs();

@@ -15,8 +15,6 @@ public class MainCamera : MonoBehaviour
         player_tf = GameObject.FindWithTag("Player").transform;
         transform.position = FindTargetPosition(player_tf.position);
     }
-
-    // Update is called once per frame
     void FixedUpdate()
     {
         Vector3 target_position = FindTargetPosition(player_tf.position);

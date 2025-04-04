@@ -2,11 +2,15 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 [Serializable]
 public class DialogueNode {
+    public string key;
     public string text;
-    public List<DialogueNode> next = new List<DialogueNode>();
+    public List<String> next = new List<String>();
     public DialogueOptionData[] dialogue_options = new DialogueOptionData[2];
-    public int change_default_dialogue_tree = 0;
+    public string set_default_dialogue_key;
+    public Action execution_function;
+    public UnityEvent execution;
 }
