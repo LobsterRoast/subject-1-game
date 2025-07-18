@@ -6,7 +6,7 @@ public abstract class Controllable : MonoBehaviour {
     private Rigidbody rb;
     private float dx;
     [SerializeField] private bool is_grounded;
-    private float jetpack_fuel = 100f;
+    private float jetpack_fuel = 10000f;
     private bool jetpack_acquired = true;
     private bool double_jump_available;
     private Collider collider;
@@ -46,8 +46,8 @@ public abstract class Controllable : MonoBehaviour {
     }
     private void UseJetpack() {
         if (entity.CheckAccessory(Accessory.Jetpack)) {
-            rb.AddForce(jetpack_vector * Time.deltaTime * global_info.gravity_fac, ForceMode.Force);
-            jetpack_fuel = Mathf.Clamp(jetpack_fuel - 0.1f, 0.0f, 100.0f);
+            rb.AddForce(jetpack_vector * Time.deltaTime * global_info.gravity_fac, ForceMode.Acceleration);
+            jetpack_fuel = Mathf.Clamp(jetpack_fuel - 0.1f, 0.0f, 10000.0f);
             jetpack_fuel_meter_prop.SetFillAmount(jetpack_fuel/100.0f);
         }
     }
@@ -107,9 +107,6 @@ public abstract class Controllable : MonoBehaviour {
         PrefabSpecificInputs();
 
     }
-    private void ClampVelocity() {
-        rb.linearVelocity = new Vector3(rb.linearVelocity.x, Mathf.Min(rb.linearVelocity.y, 15.0f), rb.linearVelocity.z);
-    }
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -122,7 +119,6 @@ public abstract class Controllable : MonoBehaviour {
     {
         GroundCheck();
         CheckInputs();
-        ClampVelocity();
     }
 
 }

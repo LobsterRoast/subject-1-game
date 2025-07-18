@@ -16,7 +16,9 @@ public class Player : ControllableEntity
     protected override void OnProjectileHit(Projectile projectile) {
         
     }
-    public void DamageTest() {
+    public void OnWallCollide(Collision collision) {}
+    public void DamageTest()
+    {
         Damage(10);
     }
     protected override void OnDeath() {
@@ -40,7 +42,7 @@ public class Player : ControllableEntity
         }
         rb.useGravity = true;
     }
-    public void Start() {
+    protected override void UnhidableStart() {
         main = this;
         active_accessory |= Accessory.Gravity_Manipulator;
         active_accessory |= Accessory.Jetpack;

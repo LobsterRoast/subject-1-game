@@ -26,7 +26,7 @@ public class ElevatorScript : MonoBehaviour
         other_tf.SetParent(transform);
     }
     void OnCollisionExit(Collision other) {
-        other.gameObject.transform.SetParent(null);
+        other.gameObject.transform.parent = null;
     }
     void FixedUpdate() {
         Vector3 pos = transform.position;

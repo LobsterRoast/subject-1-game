@@ -6,8 +6,10 @@ public class SceneStartup : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        Entity.entities = FindObjectsByType<Entity>(FindObjectsSortMode.None);
         Physics.gravity = new Vector3(0.0f, -19.62f, 0.0f);
         global_info.gravity_fac = 1f;
         global_info.gravity_multiplier = 1f;
+        StartCoroutine(Entity.CheckGravity());
     }
 }

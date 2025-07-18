@@ -2,14 +2,23 @@ using UnityEngine;
 
 public class Enemy : ControllableEntity
 {
+    private Ray forward_ray;
+    protected RaycastHit hit;
     public override EntityType entity_type { get { return EntityType.Enemy; } }
-    protected override void OnDeath() {
+    protected override void OnDeath()
+    {
         Debug.Log("Enemy Died!");
         Destroy(gameObject);
     }
-    protected override void OnProjectileHit(Projectile projectile) {
-        if (projectile.sender.entity_type == EntityType.Player) {
+    protected override void OnProjectileHit(Projectile projectile)
+    {
+        if (projectile.sender.entity_type == EntityType.Player)
+        {
             Damage(projectile.damage);
         }
+    }
+    void Update()
+    {
+
     }
 }
