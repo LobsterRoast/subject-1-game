@@ -42,7 +42,8 @@ public class Player : ControllableEntity
         }
         rb.useGravity = true;
     }
-    protected override void UnhidableStart() {
+    public override void Start() {
+        base.Start();
         main = this;
         active_accessory |= Accessory.Gravity_Manipulator;
         active_accessory |= Accessory.Jetpack;

@@ -6,27 +6,29 @@ public class Goomba : Enemy
     public Vector3 direction = new Vector3(1, 0, 0);
     public Mesh mesh;
     public float velocity;
-    public override void OnWallCollide(RaycastHit hit)
-    {
+    public override void OnWallCollide(RaycastHit hit) {
         direction *= -1;
         Debug.Log("Wall collision");
+        Debug.Log(hit.collider.gameObject);
 
     }
     void Update()
     {
-        rb.AddForce(direction * velocity, ForceMode.Acceleration);
-        if (Physics.Raycast(new Ray(transform.position, transform.forward * (mesh.bounds.max.x + 0.05f)),
+        float bottom = transform.position.y + mesh.bounds.min.y;
+            if(GroundCheck())
+        rb.linearVelocity = direction * velocity;
+        if (Physics.Raycast(new Ray(new Vector3(transform.position.x, bottom, transform.position.z), direction * (mesh.bounds.max.x + 0.05f)),
             out hit,
-            Mathf.Infinity,
+            (mesh.bounds.max.x + 0.05f),
             1 << 3))
         {
-        if(hit.collider.gameObject.layer == 3)
             OnWallCollide(hit);
         }
-        Debug.DrawRay(transform.position, transform.forward*(mesh.bounds.max.x+0.05f), Color.blue, 0.0f, false);
+        Debug.DrawRay(new Vector3(transform.position.x, bottom, transform.position.z), direction * (mesh.bounds.max.x+0.05f), Color.blue, 0.0f, false);
     }
-    protected override void UnhidableStart()
+    public override void Start()
     {
+        base.Start();
         rb = GetComponent<Rigidbody>();
         mesh = GetComponent<MeshFilter>().mesh;
     }
