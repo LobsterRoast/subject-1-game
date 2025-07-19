@@ -1317,8 +1317,9 @@ MonoBehaviour:
   max_hp: 100
   keybinds: {fileID: 11400000, guid: 01b6c22c6597e5271976a925c50af19d, type: 2}
   walk_velocity: 8
-  jump_velocity: 0
-  linear_damping: {x: 0, y: 0, z: 0}
+  jump_velocity: 500
+  linear_damping: {x: 8, y: 0, z: 0}
+  weapon: {fileID: 0}
 --- !u!1001 &1444687273
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1521,7 +1522,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7321908977370088659, guid: 5b1028d17259a293f8d5db5cab7cd3e7, type: 3}
       propertyPath: m_Drag
-      value: 8
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7585350364480703699, guid: 5b1028d17259a293f8d5db5cab7cd3e7, type: 3}
       propertyPath: m_LocalPosition.x

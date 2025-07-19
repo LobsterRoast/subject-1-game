@@ -2,6 +2,7 @@ using Unity.VisualScripting;
 using UnityEngine.InputSystem;
 
 public class PlayerNew : ControllableEntityNew {
+    public Weapon weapon;
     public override EntityType entity_type => EntityType.Player;
     protected override void OnProjectileHit(Projectile projectile) {}
     protected override void OnDeath() {}
@@ -11,7 +12,27 @@ public class PlayerNew : ControllableEntityNew {
             WalkLeft();
         if (Keybinds.GetInput(keybinds.player_walk_right))
             WalkRight();
-        if (Keybinds.GetInputDown(keybinds.player_jump))
-            Jump();
+        if (Keybinds.GetInput(keybinds.player_jetpack))
+            Jetpack();
+        if (Keybinds.GetInputDown(keybinds.toggle_instance))
+            ToggleInstance();
+        if (Keybinds.GetInputDown(keybinds.attack))
+            Attack();
+        if (Keybinds.GetInputDown(keybinds.open_menu))
+            ToggleMenu();
+        if (Keybinds.GetInputDown(keybinds.advance_or_start_dialogue))
+            EngageOrAdvanceDialogue();
+        if (Keybinds.GetInputDown(keybinds.increase_gravity))
+            IncreaseGravity();
+        if (Keybinds.GetInputDown(keybinds.decrease_gravity))
+            DecreaseGravity();
+        if (Keybinds.GetInputDown(keybinds.player_jump)) {
+            if (is_grounded)
+                Jump();
+            else if (can_double_jump) {
+                Jump();
+                can_double_jump = false;
+            }
+        }
     }
 }

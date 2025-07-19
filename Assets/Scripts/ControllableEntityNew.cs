@@ -32,7 +32,7 @@ public abstract class ControllableEntityNew : Entity {
     protected void DecreaseGravity() { }
     protected void Attack() { }
     protected void EngageOrAdvanceDialogue() { }
-    protected void ToggleMenu() {}
+    protected void ToggleMenu() { }
     protected bool is_grounded;
     [SerializeField]
     protected Keybinds keybinds;
@@ -47,6 +47,8 @@ public abstract class ControllableEntityNew : Entity {
     // This is run before inputs are checked
     protected virtual void PreInputs() {
         is_grounded = GroundCheck();
+        if (is_grounded)
+            can_double_jump = true;
     }
     protected virtual void SetVariables() {
         rb = GetComponent<Rigidbody>();
@@ -57,5 +59,6 @@ public abstract class ControllableEntityNew : Entity {
     protected abstract void GetInputs();
     protected Rigidbody rb;
     protected Collider collider;
+    protected bool can_double_jump = true;
 
 }
