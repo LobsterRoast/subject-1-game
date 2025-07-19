@@ -1,15 +1,22 @@
 using UnityEngine;
+using System.Collections.Generic;
 
 public class Projectile : MonoBehaviour
 {
-    public static Projectile[] pool = new Projectile[20];
+    public ObjectPool pool;
+    public GameObject projectile_object;
+    public Collider collider;
+    public MeshFilter mesh_filter;
+    public MeshRenderer mesh_renderer;
     public Rigidbody rb;
     public Entity sender;
     public float velocity;
     public Vector3 direction;
     public int damage;
     public WeaponTag weapon_tag;
-    public void ActivateProjectile(Entity sender, float velocity, Vector3 direction, int damage, WeaponTag weapon_tag = WeaponTag.Null) {
+    public void ActivateProjectile(Entity sender, float velocity, Vector3 position, Vector3 direction, int damage, WeaponTag weapon_tag = WeaponTag.Null) {
+        gameObject.SetActive(true);
+        transform.position = position;
         this.sender = sender;
         this.damage = damage;
         this.weapon_tag = weapon_tag;
@@ -20,6 +27,7 @@ public class Projectile : MonoBehaviour
 
     void OnCollisionEnter(Collision other)
     {
-        Destroy(gameObject);
+        pool.pool.Add(this);
+        gameObject.SetActive(false);
     }
 }
