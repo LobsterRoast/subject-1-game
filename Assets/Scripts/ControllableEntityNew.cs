@@ -24,13 +24,14 @@ public abstract class ControllableEntityNew : Entity {
         rb.linearVelocity = new Vector3(walk_velocity, rb.linearVelocity.y, rb.linearVelocity.z);
     }
     protected void Jump() {
-        rb.AddForce(jump_velocity * global_info.gravity_fac * Vector3.up);
+        Vector3 vel = rb.linearVelocity;
+        vel.y = jump_velocity;
+        rb.linearVelocity = vel;
     }
     protected void Jetpack() { }
     protected void ToggleInstance() { }
     protected void IncreaseGravity() { }
     protected void DecreaseGravity() { }
-    protected void Attack() { }
     protected void EngageOrAdvanceDialogue() { }
     protected void ToggleMenu() { }
     protected bool is_grounded;

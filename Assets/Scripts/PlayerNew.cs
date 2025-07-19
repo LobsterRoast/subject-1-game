@@ -7,6 +7,10 @@ public class PlayerNew : ControllableEntityNew {
     protected override void OnProjectileHit(Projectile projectile) {}
     protected override void OnDeath() {}
     protected override FillMeter jetpack_fuel_meter => null;
+    private void Attack() {
+        // The entity shooting the weapon is passed to the Fire() function as this will determine the projectile's behavior
+        weapon.Fire(this);
+    }
     protected override void GetInputs() {
         if (Keybinds.GetInput(keybinds.player_walk_left))
             WalkLeft();
