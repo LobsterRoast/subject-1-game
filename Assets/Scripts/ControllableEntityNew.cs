@@ -1,14 +1,61 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public abstract class ControllableEntityNew : Entity {
     public override void Start() {
         base.Start();
+        SetVariables();
     }
     public override void Update() {
         base.Update();
+        PreInputs();
+        GetInputs();
     }
+    public override void FixedUpdate() {
+        base.FixedUpdate();
+        Vector3 vel = rb.linearVelocity;
+        vel.x *= 1 - linear_damping.x * Time.deltaTime;
+        rb.linearVelocity = vel;
+    }
+    protected void WalkLeft() {
+        rb.linearVelocity = new Vector3(-walk_velocity, rb.linearVelocity.y, rb.linearVelocity.z);
+    }
+    protected void WalkRight() {
+        rb.linearVelocity = new Vector3(walk_velocity, rb.linearVelocity.y, rb.linearVelocity.z);
+    }
+    protected void Jump() {
+        rb.AddForce(jump_velocity * global_info.gravity_fac * Vector3.up);
+    }
+    protected void Jetpack() { }
+    protected void ToggleInstance() { }
+    protected void IncreaseGravity() { }
+    protected void DecreaseGravity() { }
+    protected void Attack() { }
+    protected void EngageOrAdvanceDialogue() { }
+    protected void ToggleMenu() {}
+    protected bool is_grounded;
+    [SerializeField]
+    protected Keybinds keybinds;
+    [SerializeField]
+    protected float walk_velocity;
+    [SerializeField]
+    protected float jump_velocity;
+    [SerializeField]
+    // linearDamping in a Rigidbody is a float thats applied to every axis. This movement system reimplements it as a Vector3 so that it can be applied on a per-axis basis.
+    protected Vector3 linear_damping;
     protected abstract FillMeter jetpack_fuel_meter { get; }
-    private void GetInputs(Keybinds bindings) {
+    // This is run before inputs are checked
+    protected virtual void PreInputs() {
+        is_grounded = GroundCheck();
+    }
+    protected virtual void SetVariables() {
+        rb = GetComponent<Rigidbody>();
+        collider = GetComponent<Collider>();
 
     }
+    // This is the function to check inputs and must be implemented by each Controllable individually
+    protected abstract void GetInputs();
+    protected Rigidbody rb;
+    protected Collider collider;
+
 }

@@ -11,7 +11,16 @@ public abstract class Entity : MonoBehaviour {
     protected abstract void OnProjectileHit(Projectile projectile);
     public virtual void OnWallCollide(RaycastHit hit) { }
     protected abstract void OnDeath();
-
+    public virtual void Start() {
+        health = max_hp;
+        StartCoroutine(CheckGravity());
+    }
+    public virtual void Update() {
+    }
+    public virtual void FixedUpdate() {
+    }
+    public virtual void Awake() {
+    }
     public void OnCollisionEnter(Collision collision) {
         switch (collision.gameObject.layer) {
             case 10:
@@ -23,13 +32,6 @@ public abstract class Entity : MonoBehaviour {
         health = Mathf.Clamp(health - dmg, 0, max_hp);
         if (health <= 0)
             OnDeath();
-    }
-    public virtual void Start() {
-        health = max_hp;
-        StartCoroutine(CheckGravity());
-    }
-    protected bool GroundCheck() {
-        return Physics.Raycast(new Ray(transform.position, global_info.gravity_fac * Vector3.down), 1.05f, 1 << 3);
     }
     public static IEnumerator CheckGravity() {
         bool gravity_inverted = false;
@@ -45,6 +47,12 @@ public abstract class Entity : MonoBehaviour {
             yield return null;
         }
     }
+    protected bool GroundCheck() {
+        return Physics.Raycast(new Ray(transform.position, global_info.gravity_fac * Vector3.down), 1.05f, 1 << 3);
+    }
+    protected virtual void GetVariables() {
+
+    }
 
     private static void InvertEntityScale() {
         foreach (Entity entity in entities) {
@@ -52,8 +60,5 @@ public abstract class Entity : MonoBehaviour {
                                                       entity.transform.localScale.y * -1,
                                                       entity.transform.localScale.z);
         }
-    }
-    public virtual void Update() {
-        
     }
 }
