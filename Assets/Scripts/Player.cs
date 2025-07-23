@@ -10,7 +10,6 @@ public class Player : ControllableEntity
     public static Player main;
     public Image health_bar;
     public SaveData save_data;
-    public Rigidbody rb;
     public override EntityType entity_type { get { return EntityType.Player; } }
     [ContextMenu("Damage Player")]
     protected override void OnProjectileHit(Projectile projectile) {

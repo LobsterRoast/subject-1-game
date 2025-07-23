@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Enemy : ControllableEntity
+public class Enemy : Entity
 {
     private Ray forward_ray;
     protected RaycastHit hit;

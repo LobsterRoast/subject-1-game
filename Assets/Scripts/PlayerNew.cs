@@ -2,34 +2,42 @@ using Unity.VisualScripting;
 using UnityEngine.InputSystem;
 
 public class PlayerNew : ControllableEntityNew {
+    
+    public Accessory active_accessory;
+    public static PlayerNew player;
     public Weapon weapon;
     public override EntityType entity_type => EntityType.Player;
     protected override void OnProjectileHit(Projectile projectile) {}
     protected override void OnDeath() {}
     protected override FillMeter jetpack_fuel_meter => null;
+    public override void Awake() {
+        base.Awake();
+        player = this;
+    }
+    public override void Start() {
+        base.Start();
+    }
     private void Attack() {
         // The entity shooting the weapon is passed to the Fire() function as this will determine the projectile's behavior
         weapon.Fire(this);
+    }
+    private void IncreaseGravity() { 
+        info.ChangeGravity(1f);
+    }
+    private void DecreaseGravity() {
+        info.ChangeGravity(-0.5f);
     }
     protected override void GetInputs() {
         if (Keybinds.GetInput(keybinds.player_walk_left))
             WalkLeft();
         if (Keybinds.GetInput(keybinds.player_walk_right))
             WalkRight();
-        if (Keybinds.GetInput(keybinds.player_jetpack))
-            Jetpack();
-        if (Keybinds.GetInputDown(keybinds.toggle_instance))
-            ToggleInstance();
         if (Keybinds.GetInputDown(keybinds.attack))
             Attack();
         if (Keybinds.GetInputDown(keybinds.open_menu))
             ToggleMenu();
         if (Keybinds.GetInputDown(keybinds.advance_or_start_dialogue))
             EngageOrAdvanceDialogue();
-        if (Keybinds.GetInputDown(keybinds.increase_gravity))
-            IncreaseGravity();
-        if (Keybinds.GetInputDown(keybinds.decrease_gravity))
-            DecreaseGravity();
         if (Keybinds.GetInputDown(keybinds.player_jump)) {
             if (is_grounded)
                 Jump();
@@ -37,6 +45,22 @@ public class PlayerNew : ControllableEntityNew {
                 Jump();
                 can_double_jump = false;
             }
+        }
+        switch (active_accessory) {
+            case Accessory.Jetpack:
+            if (Keybinds.GetInput(keybinds.player_jetpack))
+                Jetpack();
+                break;
+            case Accessory.Instantiator:
+            if (Keybinds.GetInputDown(keybinds.toggle_instance))
+                ToggleInstance();
+                break;
+            case Accessory.Gravity_Manipulator:
+                if (Keybinds.GetInputDown(keybinds.increase_gravity))
+                    IncreaseGravity();
+                if (Keybinds.GetInputDown(keybinds.decrease_gravity))
+                    DecreaseGravity();
+                break;
         }
     }
 }

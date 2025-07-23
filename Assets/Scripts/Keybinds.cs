@@ -1,8 +1,8 @@
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "Keybinds", menuName = "Scriptable Objects/Keybinds")]
-public class Keybinds : ScriptableObject
-{
+public class Keybinds : ScriptableObject {
+    public static Keybinds main;
     [Header("Player Movement Bindings")]
     public KeyCode player_walk_left;
     public KeyCode player_walk_right;
@@ -23,7 +23,7 @@ public class Keybinds : ScriptableObject
     public KeyCode advance_or_start_dialogue;
     public KeyCode open_menu;
     public static bool GetInputDown(KeyCode key_code) {
-        switch(key_code) {
+        switch (key_code) {
             case KeyCode.WheelUp:
                 return Input.GetAxis("Mouse ScrollWheel") > 0;
                 break;
@@ -36,7 +36,7 @@ public class Keybinds : ScriptableObject
         }
     }
     public static bool GetInput(KeyCode key_code) {
-        switch(key_code) {
+        switch (key_code) {
             case KeyCode.WheelUp:
                 return Input.GetAxis("Mouse ScrollWheel") > 0;
                 break;
@@ -47,6 +47,10 @@ public class Keybinds : ScriptableObject
                 return Input.GetKey(key_code);
                 break;
         }
+    }
+
+    void OnEnable() {
+        main = this;
     }
 }
 

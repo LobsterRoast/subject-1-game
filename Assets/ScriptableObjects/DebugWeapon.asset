@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 252de35642be4644ebb5c79e63e6cb95, type: 3}
   m_Name: DebugWeapon
   m_EditorClassIdentifier: 
-  projectile: {fileID: 0}
-  velocity: 0
-  damage: 0
+  pool: {fileID: 11400000, guid: 8818ad2df13ad504bb8a45ece7d165d8, type: 2}
+  projectile_prefab: {fileID: 0}
+  velocity: 40
   damage: 10

@@ -1,18 +1,20 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 
 public abstract class Entity : MonoBehaviour {
-    public GlobalInfo global_info;
     public static Entity[] entities;
     public int max_hp;
     private int health;
+    protected GlobalInfo info = GlobalInfo.main;
     public abstract EntityType entity_type { get; }
     protected abstract void OnProjectileHit(Projectile projectile);
     public virtual void OnWallCollide(RaycastHit hit) { }
     protected abstract void OnDeath();
     public virtual void Start() {
         health = max_hp;
+        rb = GetComponent<Rigidbody>();
         StartCoroutine(CheckGravity());
     }
     public virtual void Update() {
@@ -20,6 +22,7 @@ public abstract class Entity : MonoBehaviour {
     public virtual void FixedUpdate() {
     }
     public virtual void Awake() {
+        GetVariables();
     }
     public void OnCollisionEnter(Collision collision) {
         switch (collision.gameObject.layer) {
@@ -47,11 +50,12 @@ public abstract class Entity : MonoBehaviour {
             yield return null;
         }
     }
+    protected Rigidbody rb;
     protected bool GroundCheck() {
-        return Physics.Raycast(new Ray(transform.position, global_info.gravity_fac * Vector3.down), 1.05f, 1 << 3);
+        return Physics.Raycast(new Ray(transform.position, info.gravity_fac * Vector3.down), 1.05f, 1 << 3);
     }
     protected virtual void GetVariables() {
-
+        rb = GetComponent<Rigidbody>();
     }
 
     private static void InvertEntityScale() {

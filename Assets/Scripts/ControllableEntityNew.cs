@@ -1,5 +1,6 @@
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public abstract class ControllableEntityNew : Entity {
     public override void Start() {
@@ -30,13 +31,10 @@ public abstract class ControllableEntityNew : Entity {
     }
     protected void Jetpack() { }
     protected void ToggleInstance() { }
-    protected void IncreaseGravity() { }
-    protected void DecreaseGravity() { }
     protected void EngageOrAdvanceDialogue() { }
     protected void ToggleMenu() { }
     protected bool is_grounded;
-    [SerializeField]
-    protected Keybinds keybinds;
+    protected Keybinds keybinds = Keybinds.main;
     [SerializeField]
     protected float walk_velocity;
     [SerializeField]
@@ -44,6 +42,8 @@ public abstract class ControllableEntityNew : Entity {
     [SerializeField]
     // linearDamping in a Rigidbody is a float thats applied to every axis. This movement system reimplements it as a Vector3 so that it can be applied on a per-axis basis.
     protected Vector3 linear_damping;
+    protected Collider collider;
+    protected bool can_double_jump = true;
     protected abstract FillMeter jetpack_fuel_meter { get; }
     // This is run before inputs are checked
     protected virtual void PreInputs() {
@@ -52,14 +52,9 @@ public abstract class ControllableEntityNew : Entity {
             can_double_jump = true;
     }
     protected virtual void SetVariables() {
-        rb = GetComponent<Rigidbody>();
         collider = GetComponent<Collider>();
-
     }
     // This is the function to check inputs and must be implemented by each Controllable individually
     protected abstract void GetInputs();
-    protected Rigidbody rb;
-    protected Collider collider;
-    protected bool can_double_jump = true;
 
 }

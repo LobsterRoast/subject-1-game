@@ -12,4 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 232e2372afd0efd4e91efe496c0620e1, type: 3}
   m_Name: ObjectPool
   m_EditorClassIdentifier: 
+  basic_projectile: {fileID: 5889207561447131173, guid: 98b531d8ede958de688db1cf5a49a0f0, type: 3}
   pool: []
