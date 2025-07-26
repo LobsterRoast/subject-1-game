@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 
+[RequireComponent(typeof(Rigidbody))]
 public abstract class Entity : MonoBehaviour {
     public static Entity[] entities;
     public int max_hp;

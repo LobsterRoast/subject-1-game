@@ -39,8 +39,8 @@ public class PlayerControl : Controllable {
             }
         }
     }
-    public void AdvanceDialogue(int index) {
-        active_dialogue_controller.Advance(index);
+    public void AdvanceDialogue() {
+        active_dialogue_controller.Advance();
     }
     private void ToggleInstance() {
         if (instance)

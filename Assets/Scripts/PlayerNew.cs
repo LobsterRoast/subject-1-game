@@ -1,5 +1,4 @@
-using Unity.VisualScripting;
-using UnityEngine.InputSystem;
+using UnityEngine;
 
 public class PlayerNew : ControllableEntityNew {
     
@@ -10,6 +9,7 @@ public class PlayerNew : ControllableEntityNew {
     protected override void OnProjectileHit(Projectile projectile) {}
     protected override void OnDeath() {}
     protected override FillMeter jetpack_fuel_meter => null;
+    private DialogueController active_dialogue_controller;
     public override void Awake() {
         base.Awake();
         player = this;
@@ -17,10 +17,19 @@ public class PlayerNew : ControllableEntityNew {
     public override void Start() {
         base.Start();
     }
+    public void OnTriggerEnter(Collider other)
+    {
+        active_dialogue_controller = other.gameObject.GetComponent<DialogueController>();
+    }
     private void Attack() {
         // The entity shooting the weapon is passed to the Fire() function as this will determine the projectile's behavior
         weapon.Fire(this);
     }
+    protected void EngageOrAdvanceDialogue() {
+        active_dialogue_controller.Advance();
+    }
+    protected void ToggleMenu() { }
+    protected void ToggleInstance() { }
     private void IncreaseGravity() { 
         info.ChangeGravity(1f);
     }
@@ -46,14 +55,15 @@ public class PlayerNew : ControllableEntityNew {
                 can_double_jump = false;
             }
         }
+
         switch (active_accessory) {
             case Accessory.Jetpack:
-            if (Keybinds.GetInput(keybinds.player_jetpack))
-                Jetpack();
+                if (Keybinds.GetInput(keybinds.player_jetpack))
+                    Jetpack();
                 break;
             case Accessory.Instantiator:
-            if (Keybinds.GetInputDown(keybinds.toggle_instance))
-                ToggleInstance();
+                if (Keybinds.GetInputDown(keybinds.toggle_instance))
+                    ToggleInstance();
                 break;
             case Accessory.Gravity_Manipulator:
                 if (Keybinds.GetInputDown(keybinds.increase_gravity))

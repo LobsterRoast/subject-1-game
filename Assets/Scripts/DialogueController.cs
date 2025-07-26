@@ -7,7 +7,6 @@ using TMPro;
 public class DialogueController : MonoBehaviour
 {
     private static GameObject dialogue_box;
-    private static TextMeshProUGUI tmp;
     private static DialogueOption option_1, option_2;
     private Saveable<string> initial_node_getter;
     private bool dialogue_active;
@@ -19,9 +18,9 @@ public class DialogueController : MonoBehaviour
     private Dictionary<string, DialogueNode> dialogue_nodes_hashmap = new Dictionary<string, DialogueNode>();
     public int save_id;
     private IEnumerator UpdateText() {
-        tmp.text = "";
+        UI.SetDialogueText("");
         for (int i = 1; (i <= active_dialogue_node.text.Length) && dialogue_active == true; i++) {
-            tmp.text = active_dialogue_node.text.Substring(0, i);
+            UI.SetDialogueText(active_dialogue_node.text.Substring(0, i));
             yield return new WaitForSeconds(0.05f);
         }
     }
@@ -35,13 +34,13 @@ public class DialogueController : MonoBehaviour
 
     private void CreateOptions() {
         options_open = true;
-        tmp.enabled = false;
+        UI.CloseDialogueText();
         option_1.Init(active_dialogue_node.dialogue_options[0]);
         option_2.Init(active_dialogue_node.dialogue_options[1]);
     }
     private void CloseOptions() {
         options_open = false;
-        tmp.enabled = true;
+        UI.OpenDialogueText();
         option_1.Close();
         option_2.Close();
     }
@@ -55,10 +54,6 @@ public class DialogueController : MonoBehaviour
         active_dialogue_node.execution?.Invoke();
         UpdateSavedDialogueState();
         StartCoroutine(UpdateText());
-    }
-    public void Advance(int index) {
-        ChangeNode(index);
-        CloseOptions();
     }
 
     // Returns true if dialogue continues, and false if dialogue ends
@@ -95,7 +90,6 @@ public class DialogueController : MonoBehaviour
         catch(SaveDataNotFoundException e) {
             Debug.LogException(e);
         }
-        tmp = GameObject.FindWithTag("DialogueText").GetComponent<TextMeshProUGUI>();
         option_1 = GameObject.FindWithTag("Option1").GetComponent<DialogueOption>();
         option_2 = GameObject.FindWithTag("Option2").GetComponent<DialogueOption>();
         dialogue_box = GameObject.FindWithTag("DialogueBox");
