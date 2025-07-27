@@ -1,11 +1,8 @@
 using System.Collections;
-using System.Collections.Generic;
-using System.ComponentModel;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Player : ControllableEntity
-{
+public class Player : ControllableEntity {
     // Static reference to the player, since there should only be one at a time
     public static Player main;
     public Image health_bar;
@@ -13,11 +10,10 @@ public class Player : ControllableEntity
     public override EntityType entity_type { get { return EntityType.Player; } }
     [ContextMenu("Damage Player")]
     protected override void OnProjectileHit(Projectile projectile) {
-        
+
     }
-    public void OnWallCollide(Collision collision) {}
-    public void DamageTest()
-    {
+    public void OnWallCollide(Collision collision) { }
+    public void DamageTest() {
         Damage(10);
     }
     protected override void OnDeath() {

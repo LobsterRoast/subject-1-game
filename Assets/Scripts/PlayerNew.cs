@@ -3,7 +3,7 @@ using UnityEngine;
 public class PlayerNew : ControllableEntityNew {
     
     public Accessory active_accessory;
-    public static PlayerNew player;
+    public static PlayerNew player { get; private set; }
     public Weapon weapon;
     public override EntityType entity_type => EntityType.Player;
     protected override void OnProjectileHit(Projectile projectile) {}

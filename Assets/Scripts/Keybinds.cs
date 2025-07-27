@@ -2,7 +2,7 @@ using UnityEngine;
 
 [CreateAssetMenu(fileName = "Keybinds", menuName = "Scriptable Objects/Keybinds")]
 public class Keybinds : ScriptableObject {
-    public static Keybinds main;
+    public static Keybinds main { get; private set; }
     [Header("Player Movement Bindings")]
     public KeyCode player_walk_left;
     public KeyCode player_walk_right;
