@@ -1,8 +1,8 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "GlobalInfo", menuName = "Scriptable Objects/GlobalInfo")]
-public class GlobalInfo : ScriptableObject {
-    public static GlobalInfo main;
+[CreateAssetMenu(fileName = "GravitySystem", menuName = "Scriptable Objects/GravitySystem")]
+public class GravitySystem : ScriptableObject {
+    public static GravitySystem main { get; private set; }
     public float gravity_fac = 1.0f;
     public float gravity_multiplier = 1.0f;
     public void ChangeGravity(float fac) {

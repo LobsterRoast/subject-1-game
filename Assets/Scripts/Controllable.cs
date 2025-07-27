@@ -18,7 +18,7 @@ public abstract class Controllable : MonoBehaviour {
     // Publics
     public ControllableEntity entity;
     public Keybinds bindings;
-    public GlobalInfo global_info;
+    public GravitySystem gravity_system;
     public float velocity;
     public Vector3 jump_vector;
     public Vector3 jetpack_vector;
@@ -46,14 +46,14 @@ public abstract class Controllable : MonoBehaviour {
     }
     private void UseJetpack() {
         if (entity.CheckAccessory(Accessory.Jetpack)) {
-            rb.AddForce(jetpack_vector * Time.deltaTime * global_info.gravity_fac, ForceMode.Acceleration);
+            rb.AddForce(jetpack_vector * Time.deltaTime * gravity_system.gravity_fac, ForceMode.Acceleration);
             jetpack_fuel = Mathf.Clamp(jetpack_fuel - 0.1f, 0.0f, 10000.0f);
             jetpack_fuel_meter_prop.SetFillAmount(jetpack_fuel/100.0f);
         }
     }
 
     private void GroundCheck() {
-        is_grounded = Physics.Raycast(new Ray(transform.position, global_info.gravity_fac * Vector3.down), 1.05f, 1 << 3);
+        is_grounded = Physics.Raycast(new Ray(transform.position, gravity_system.gravity_fac * Vector3.down), 1.05f, 1 << 3);
         if (is_grounded)
             double_jump_available = true;
     }
@@ -70,7 +70,7 @@ public abstract class Controllable : MonoBehaviour {
             collider.material = physics_material;
             rb.constraints |= RigidbodyConstraints.FreezeRotationZ;
         }
-        rb.AddForce(global_info.gravity_fac * jump_vector, ForceMode.Force);
+        rb.AddForce(gravity_system.gravity_fac * jump_vector, ForceMode.Force);
     }
     private void DoubleJump() {
         Jump();

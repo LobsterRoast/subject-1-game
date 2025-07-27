@@ -8,7 +8,7 @@ public abstract class Entity : MonoBehaviour {
     public static Entity[] entities;
     public int max_hp;
     private int health;
-    protected GlobalInfo info = GlobalInfo.main;
+    protected GravitySystem gravity_system = GravitySystem.main;
     public abstract EntityType entity_type { get; }
     protected abstract void OnProjectileHit(Projectile projectile);
     public virtual void OnWallCollide(RaycastHit hit) { }
@@ -53,7 +53,7 @@ public abstract class Entity : MonoBehaviour {
     }
     protected Rigidbody rb;
     protected bool GroundCheck() {
-        return Physics.Raycast(new Ray(transform.position, info.gravity_fac * Vector3.down), 1.05f, 1 << 3);
+        return Physics.Raycast(new Ray(transform.position, gravity_system.gravity_fac * Vector3.down), 1.05f, 1 << 3);
     }
     protected virtual void GetVariables() {
         rb = GetComponent<Rigidbody>();

@@ -31,10 +31,10 @@ public class PlayerNew : ControllableEntityNew {
     protected void ToggleMenu() { }
     protected void ToggleInstance() { }
     private void IncreaseGravity() { 
-        info.ChangeGravity(1f);
+        gravity_system.ChangeGravity(0.5f);
     }
     private void DecreaseGravity() {
-        info.ChangeGravity(-0.5f);
+        gravity_system.ChangeGravity(-0.5f);
     }
     protected override void GetInputs() {
         if (Keybinds.GetInput(keybinds.player_walk_left))

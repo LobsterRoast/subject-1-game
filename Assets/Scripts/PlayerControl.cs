@@ -79,7 +79,7 @@ public class PlayerControl : Controllable {
                 axis++;
             if (Keybinds.GetInput(bindings.decrease_gravity))
                 axis--;
-            global_info.ChangeGravity(axis*3f);
+            gravity_system.ChangeGravity(axis*3f);
         }
         if (Keybinds.GetInputDown(bindings.open_menu)) {
             DynamicMenu.menu.Toggle();
